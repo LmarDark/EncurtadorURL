@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+    laravel.test:
+        build:
+            context: './vendor/laravel/sail/runtimes/8.3'
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: 'sail-8.3/app'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '${APP_PORT:-80}:80'
+            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            IGNITION_LOCAL_SITES_PATH: '${PWD}'
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - sail
+        depends_on: {  }
+
+    # Serviço do Jenkins
+    jenkins:
+        image: jenkins/jenkins:lts
+        container_name: jenkins
+        ports:
+            - "8080:8080"        # Porta do Jenkins
+            - "50000:50000"      # Porta para comunicação entre o Jenkins e agentes
+        volumes:
+            - jenkins_home:/var/jenkins_home
+        networks:
+            - sail
+        environment:
+            - JAVA_OPTS=-Djenkins.install.runSetupWizard=false  # Desabilita o assistente de configuração inicial
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        depends_on:
+            - laravel.test
+
+volumes:
+    jenkins_home:
+        driver: local
+
+networks:
+    sail:
+        driver: bridge

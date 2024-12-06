@@ -1,6 +1,6 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-## Encurtador de URLs e Linktree
+## Encurtador de URLs e Acesso Rápido
 Este projeto é uma aplicação web que oferece duas funcionalidades principais: encurtar URLs e criar páginas personalizadas para centralizar links, similares ao Linktree. Ambas as ferramentas podem ser utilizadas de forma independente, permitindo aos usuários atender diferentes necessidades, como compartilhar links individuais ou agrupar vários em uma única página prática e acessível.
 
 ### Descrição do Projeto

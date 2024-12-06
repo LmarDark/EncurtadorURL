@@ -22,29 +22,29 @@ O Encurtador de URLs e o Acesso Rápido (Linktree) é uma solução simples e in
 
 ### Como Usar
 Clone o repositório:
-```bash
-git clone https://github.com/LmarDark/SkeletonEncurtadorURL
+- ```bash
+  git clone https://github.com/LmarDark/SkeletonEncurtadorURL
 ```
 Entre no diretório:
-```bash
-cd SkeletonEncurtadorURL
+- ```bash
+  cd SkeletonEncurtadorURL
 ```
 Crie o .env copiando o conteúdo do .env.example
-```bash
-cp .env.example .env
+- ```bash
+  cp .env.example .env
 ```
 Gere a chave da aplicação:
-```bash
-php artisan key:generate
+- ```bash
+  php artisan key:generate
 ```
 Façao migrate do banco de dados:
-```bash
-php artisan migrate
+- ```bash
+  php artisan migrate
 ```
 Instale as dependências da aplicação:
-```bash
-composer install
-npm install
+- ```bash
+  composer install
+  npm install
 ```
 
 ## Rodar o projeto:

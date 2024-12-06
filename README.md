@@ -24,35 +24,34 @@ O Encurtador de URLs e o Acesso Rápido (Linktree) é uma solução simples e in
 Clone o repositório:
 - ```bash
   git clone https://github.com/LmarDark/SkeletonEncurtadorURL
-```
+
 Entre no diretório:
 - ```bash
   cd SkeletonEncurtadorURL
-```
+
 Crie o .env copiando o conteúdo do .env.example
 - ```bash
   cp .env.example .env
-```
+
 Gere a chave da aplicação:
 - ```bash
   php artisan key:generate
-```
+
 Façao migrate do banco de dados:
 - ```bash
   php artisan migrate
-```
+
 Instale as dependências da aplicação:
 - ```bash
   composer install
   npm install
-```
+
 
 ## Rodar o projeto:
 Para iniciar a aplicação localmente, execute o seguinte comando:
-```bash
-php artisan serve
-npm run dev
-```
+- ```bash
+  php artisan serve
+  npm run dev
 
 ## Contribuindo para o Projeto
 Obrigado por querer contribuir! 🎉 Este projeto é open-source e sua ajuda é muito bem-vinda. Siga as orientações abaixo para contribuir com o desenvolvimento.
@@ -67,17 +66,17 @@ Obrigado por querer contribuir! 🎉 Este projeto é open-source e sua ajuda é 
      cd nome-do-repositorio
 3. Crie uma Branch
    - Crie uma branch para trabalhar em suas alterações:
-    ```bash
-    git checkout -b minha-branch
+    - ```bash
+      git checkout -b minha-branch
 4. Faça Suas Alterações
    - Após finalizar, salve suas alterações:
-   ```bash
-   git add .
-   git commit -m "Descrição clara do que você alterou"
+   - ```bash
+     git add .
+     git commit -m "Descrição clara do que você alterou"
 6. Envie as Alterações
    - Suba as alterações para seu repositório forkado:
-   ```bash
-   git push origin minha-branch
+   - ```bash
+     git push origin minha-branch
 7. Crie um Pull Request
    - Acesse o repositório original no GitHub e clique no botão "Compare & pull request".
    - Adicione uma descrição clara do que foi alterado e submeta o Pull Request para revisão.

@@ -46,29 +46,40 @@
       </div>
     </div>
     <script>
-        const payload = {
-            originalUrl: 'https://exemplo.com',
-        };
-
         const api = axios.create({
-            baseURL: 'https://seu-backend.com',
+            baseURL: 'https://encurtadorurl-backend.onrender.com',
             timeout: 5000,
             headers: {
                 'Content-Type': 'application/json',
             },
             withCredentials: true,
         });
-
-        function createShorterUrl(data) {
+    
+        async function createShorterUrl(data) {
             try {
-                const response = api.post('/create-shorter-url', data);
-                console.log('URL encurtada:', response.data);
+                const response = await api.post('/create', data);
+                // Mostra o resultado na tela
+                document.getElementById('result').classList.remove('hidden');
+                const shortUrl = response.data.shortUrl || response.data.url || response.data.result; // ajuste conforme resposta da API
+                const shortUrlElem = document.getElementById('short-url');
+                shortUrlElem.href = shortUrl;
+                shortUrlElem.textContent = shortUrl;
             } catch (error) {
-                console.error('Erro ao criar URL encurtada:', error.response?.data || error.message);
+                alert('Erro ao criar URL encurtada: ' + (error.response?.data?.message || error.message));
             }
         }
-
-        createShorterUrl(payload);
+    
+        document.getElementById('shorten-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const url = document.getElementById('url-input').value;
+            createShorterUrl({ originalUrl: url });
+        });
+    
+        // Botão de copiar
+        document.getElementById('copy-btn').addEventListener('click', function() {
+            const shortUrl = document.getElementById('short-url').textContent;
+            navigator.clipboard.writeText(shortUrl);
+        });
     </script>
 </body>
 </html>

@@ -57,7 +57,7 @@
     
         async function createShorterUrl(data) {
             try {
-                const response = await api.post('/create', data);
+                const response = await api.post('/api/create', data);
                 // Mostra o resultado na tela
                 document.getElementById('result').classList.remove('hidden');
                 const shortUrl = response.data.shortUrl || response.data.url || response.data.result; // ajuste conforme resposta da API

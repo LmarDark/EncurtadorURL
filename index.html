@@ -35,7 +35,7 @@
         </div>
         <form id="shorten-form" class="space-y-4">
           <input type="url" id="url-input" placeholder="Cole sua URL aqui" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg transition" />
-          <button type="submit" class="select-none w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-lg transition" onclick="createShorterUrl()">Encurtar</button>
+          <button type="submit" class="select-none w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-lg transition">Encurtar</button>
         </form>
         
         <div id="result" class="hidden mt-6">
@@ -46,40 +46,39 @@
       </div>
     </div>
     <script>
-        const api = axios.create({
-            baseURL: 'https://encurtadorurl-backend.onrender.com',
-            timeout: 5000,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            withCredentials: true,
-        });
+      const api = axios.create({
+          baseURL: 'https://encurtadorurl-backend.onrender.com', 
+          timeout: 5000,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+      });
     
-        async function createShorterUrl(data) {
-            try {
-                const response = await api.post('/api/create', data);
-                // Mostra o resultado na tela
-                document.getElementById('result').classList.remove('hidden');
-                const shortUrl = response.data.shortUrl || response.data.url || response.data.result; // ajuste conforme resposta da API
-                const shortUrlElem = document.getElementById('short-url');
-                shortUrlElem.href = shortUrl;
-                shortUrlElem.textContent = shortUrl;
-            } catch (error) {
-                alert('Erro ao criar URL encurtada: ' + (error.response?.data?.message || error.message));
-            }
+      async function createShorterUrl(data) {
+        try {
+            const response = await api.post('/api/create', data);
+            // Mostra o resultado na tela
+            document.getElementById('result').classList.remove('hidden');
+            const shortUrl = response.data.shortUrl || response.data.url || response.data.result; // ajuste conforme resposta da API
+            const shortUrlElem = document.getElementById('short-url');
+            shortUrlElem.href = shortUrl;
+            shortUrlElem.textContent = shortUrl;
+        } catch (error) {
+            alert('Erro ao criar URL encurtada: ' + (error.response?.data?.message || error.message));
         }
+      }
     
-        document.getElementById('shorten-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const url = document.getElementById('url-input').value;
-            createShorterUrl({ originalUrl: url });
-        });
-    
-        // Botão de copiar
-        document.getElementById('copy-btn').addEventListener('click', function() {
-            const shortUrl = document.getElementById('short-url').textContent;
-            navigator.clipboard.writeText(shortUrl);
-        });
+      document.getElementById('shorten-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const url = document.getElementById('url-input').value;
+        createShorterUrl({ originalUrl: url });
+      });
+  
+      // Botão de copiar
+      document.getElementById('copy-btn').addEventListener('click', function() {
+        const shortUrl = document.getElementById('short-url').textContent;
+        navigator.clipboard.writeText(shortUrl);
+      });
     </script>
 </body>
 </html>

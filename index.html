@@ -59,7 +59,7 @@
             const response = await api.post('/api/create', data);
             // Mostra o resultado na tela
             document.getElementById('result').classList.remove('hidden');
-            const shortUrl = response.data.shortUrl || response.data.url || response.data.result; // ajuste conforme resposta da API
+            const shortUrl = response.data.original_url
             const shortUrlElem = document.getElementById('short-url');
             shortUrlElem.href = shortUrl;
             shortUrlElem.textContent = shortUrl;

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encurtador de URL</title>
     <meta name="description" content="Encurte links de forma rápida, fácil e gratuita. Cole sua URL e gere um link curto instantaneamente!">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/892/892692.png" type="image/png" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9536858565790302"
      crossorigin="anonymous"></script>
@@ -12,7 +13,6 @@
 </head>
 <body>
     <div class="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-100">
-      <!-- Fundo animado -->
       <div aria-hidden="true" class="absolute inset-0 w-full h-full z-0">
         <div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-gradient-to-tr from-blue-400 via-blue-200 to-purple-300 opacity-40 rounded-full animate-pulse-slow blur-3xl"></div>
         <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-gradient-to-br from-purple-400 via-pink-200 to-blue-200 opacity-30 rounded-full animate-pulse-slow blur-3xl"></div>
@@ -59,7 +59,6 @@
       async function createShorterUrl(data) {
         try {
             const response = await api.post('/api/create', data);
-            // Mostra o resultado na tela
             document.getElementById('result').classList.remove('hidden');
             const shortUrl = response.data.short_url
             const shortUrlElem = document.getElementById('short-url');
@@ -76,7 +75,6 @@
         createShorterUrl({ originalUrl: url });
       });
   
-      // Botão de copiar
       document.getElementById('copy-btn').addEventListener('click', function() {
         const shortUrl = document.getElementById('short-url').textContent;
         navigator.clipboard.writeText(shortUrl);

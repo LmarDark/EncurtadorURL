@@ -1,104 +1,101 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encurtador de URL</title>
-    <meta name="description" content="Encurte links de forma rápida, fácil e gratuita. Cole sua URL e gere um link curto instantaneamente!">
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/892/892692.png" type="image/png" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9536858565790302"
-     crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encurtador de URL</title>
+  <meta name="description" content="Encurte links de forma rápida, fácil e gratuita. Cole sua URL e gere um link curto instantaneamente!">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/892/892692.png" type="image/png" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9536858565790302" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div class="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-100">
-      <div aria-hidden="true" class="absolute inset-0 w-full h-full z-0">
-        <div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-gradient-to-tr from-blue-400 via-blue-200 to-purple-300 opacity-40 rounded-full animate-pulse-slow blur-3xl"></div>
-        <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-gradient-to-br from-purple-400 via-pink-200 to-blue-200 opacity-30 rounded-full animate-pulse-slow blur-3xl"></div>
-      </div>
-      <div class="shadow-lg bg-white rounded-xl p-8 max-w-md w-full mx-auto relative z-10">
-    <style>
-      @keyframes pulse-slow {
-        0%, 100% { opacity: 0.4; transform: scale(1); }
-        50% { opacity: 0.7; transform: scale(1.08); }
-      }
-      .animate-pulse-slow {
-        animation: pulse-slow 6s ease-in-out infinite;
-      }
-      .blur-3xl {
-        filter: blur(64px);
-      }
-    </style>
-        <div class="flex flex-col items-center mb-6">
-          <img src="https://cdn-icons-png.flaticon.com/512/892/892692.png" alt="Logo Encurtador" class="w-16 h-16 mb-2 drop-shadow-md select-none">
-          <h1 class="text-3xl font-bold text-blue-700 text-center">Encurtador de URL</h1>
-          <p class="text-gray-500 text-center mt-2 text-base">Encurte links de forma rápida, fácil e gratuita.</p>
-        </div>
-        <form id="shorten-form" class="space-y-4">
-          <input type="url" id="url-input" placeholder="Cole sua URL aqui" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg transition" />
-          <button type="submit" class="select-none w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-lg transition">Encurtar</button>
-        </form>
-        
-        <div id="result" class="hidden mt-6">
-          <p class="text-gray-700 mb-2 text-center">URL encurtada:</p>
-          <a id="short-url" href="#" target="_blank" class="block bg-blue-50 border border-blue-200 rounded-lg px-4 py-2 text-blue-700 font-mono text-center break-all mb-3 hover:underline"></a>
-          <button id="copy-btn" class="w-full py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold rounded-lg transition">Copiar</button>
-        </div>
-      </div>
+  <div class="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-100 px-4 sm:px-0">
+    <div aria-hidden="true" class="absolute inset-0 w-full h-full z-0">
+      <div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-gradient-to-tr from-blue-400 via-blue-200 to-purple-300 opacity-40 rounded-full animate-pulse-slow blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-gradient-to-br from-purple-400 via-pink-200 to-blue-200 opacity-30 rounded-full animate-pulse-slow blur-3xl"></div>
     </div>
-    <script>
-      const api = axios.create({
-          baseURL: 'https://encurtadorurl-backend.onrender.com', 
-          timeout: 5000,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-      });
-    
-      async function createShorterUrl(data) {
-        try {
-            const response = await api.post('/api/create', data);
-            document.getElementById('result').classList.remove('hidden');
-            const shortUrl = response.data.short_url
-            const shortUrlElem = document.getElementById('short-url');
-            shortUrlElem.href = shortUrl;
-            shortUrlElem.textContent = shortUrl;
-        } catch (error) {
-            alert('Erro ao criar URL encurtada: ' + (error.response?.data?.message || error.message));
+    <div class="shadow-lg bg-white rounded-xl p-6 sm:p-8 max-w-md w-full mx-auto relative z-10">
+      <style>
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.4; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.08); }
         }
+        .animate-pulse-slow {
+          animation: pulse-slow 6s ease-in-out infinite;
+        }
+        .blur-3xl {
+          filter: blur(64px);
+        }
+      </style>
+      <div class="flex flex-col items-center mb-6">
+        <img src="https://cdn-icons-png.flaticon.com/512/892/892692.png" alt="Logo Encurtador" class="w-16 h-16 mb-2 drop-shadow-md select-none">
+        <h1 class="text-3xl font-bold text-blue-700 text-center">Encurtador de URL</h1>
+        <p class="text-gray-500 text-center mt-2 text-base">Encurte links de forma rápida, fácil e gratuita.</p>
+      </div>
+      <form id="shorten-form" class="space-y-4">
+        <input type="url" id="url-input" placeholder="Cole sua URL aqui" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-base sm:text-lg transition" />
+        <button type="submit" class="select-none w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-base sm:text-lg transition">Encurtar</button>
+      </form>
+      <div id="result" class="hidden mt-6">
+        <p class="text-gray-700 mb-2 text-center">URL encurtada:</p>
+        <a id="short-url" href="#" target="_blank" class="block bg-blue-50 border border-blue-200 rounded-lg px-4 py-2 text-blue-700 font-mono text-center break-all mb-3 hover:underline"></a>
+        <button id="copy-btn" class="w-full py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold rounded-lg transition">Copiar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const api = axios.create({
+      baseURL: 'https://encurtadorurl-backend.onrender.com',
+      timeout: 5000,
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    async function createShorterUrl(data) {
+      try {
+        const response = await api.post('/api/create', data);
+        document.getElementById('result').classList.remove('hidden');
+        const shortUrl = response.data.short_url;
+        const shortUrlElem = document.getElementById('short-url');
+        shortUrlElem.href = shortUrl;
+        shortUrlElem.textContent = shortUrl;
+      } catch (error) {
+        alert('Erro ao criar URL encurtada: ' + (error.response?.data?.message || error.message));
       }
-    
-      document.getElementById('shorten-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const url = document.getElementById('url-input').value;
-        createShorterUrl({ originalUrl: url });
-      });
-  
-      document.getElementById('copy-btn').addEventListener('click', function() {
-        const shortUrl = document.getElementById('short-url').textContent;
-        navigator.clipboard.writeText(shortUrl);
-      });
+    }
+
+    document.getElementById('shorten-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const url = document.getElementById('url-input').value;
+      createShorterUrl({ originalUrl: url });
+    });
+
+    document.getElementById('copy-btn').addEventListener('click', function() {
+      const shortUrl = document.getElementById('short-url').textContent;
+      navigator.clipboard.writeText(shortUrl);
+    });
+  </script>
+
+  <div class="fixed top-1/2 left-0 transform -translate-y-1/2 z-50 hidden lg:block">
+    <ins class="adsbygoogle"
+         style="display:block; width:160px; height:600px"
+         data-ad-client="ca-pub-9536858565790302"
+         data-ad-slot="4658745324"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+  </div>
 
-    <div class="fixed top-1/2 left-0 transform -translate-y-1/2 z-50">
-      <ins class="adsbygoogle"
-           style="display:block; width:160px; height:600px"
-           data-ad-client="ca-pub-9536858565790302"
-           data-ad-slot="4658745324"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
-
-    <div class="fixed top-1/2 right-0 transform -translate-y-1/2 z-50">
-      <ins class="adsbygoogle"
-           style="display:block; width:160px; height:600px"
-           data-ad-client="ca-pub-9536858565790302"
-           data-ad-slot="4658745324"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
+  <div class="fixed top-1/2 right-0 transform -translate-y-1/2 z-50 hidden lg:block">
+    <ins class="adsbygoogle"
+         style="display:block; width:160px; height:600px"
+         data-ad-client="ca-pub-9536858565790302"
+         data-ad-slot="4658745324"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 </body>
 </html>

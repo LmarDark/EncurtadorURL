@@ -77,8 +77,11 @@ Resposta:
 }
 ```
 
+---
+<br>
 ### [📄 Repositório Backend no GitHub](https://github.com/LmarDark/EncurtadorUrl-backend)
-
+<br>
+---
 ## 📄 Licença
 
 Este projeto está licenciado sob a [MIT License](https://opensource.org/licenses/MIT).

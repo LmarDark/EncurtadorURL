@@ -77,7 +77,7 @@ Resposta:
 }
 ```
 
-## Documentação do BACKEND 
+## 📄 Documentação do BACKEND 
   - https://github.com/LmarDark/EncurtadorUrl-backend
 
 ---
@@ -85,5 +85,3 @@ Resposta:
 ## 📄 Licença
 
 Este projeto está licenciado sob a [MIT License](https://opensource.org/licenses/MIT).
-
----

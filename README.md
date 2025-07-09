@@ -80,7 +80,7 @@ Resposta:
 ---
 
 ## 📄 Documentação do Backend
-### [📄 Repositório Backend no GitHub](https://github.com/LmarDark/EncurtadorUrl-backend)
+### [Repositório Backend no GitHub](https://github.com/LmarDark/EncurtadorUrl-backend)
 
 
 ---

@@ -11,8 +11,6 @@
 
 ---
 
-## 📦 Front-End
-
 ### 📋 Descrição
 
 Este é o frontend do projeto **Encurtador de URL**, uma interface estática desenvolvida com **HTML**, **Tailwind CSS** e **JavaScript (Axios)**.  

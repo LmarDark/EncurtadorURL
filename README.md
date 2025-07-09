@@ -85,3 +85,5 @@ Resposta:
 ## 📄 Licença
 
 Este projeto está licenciado sob a [MIT License](https://opensource.org/licenses/MIT).
+
+---

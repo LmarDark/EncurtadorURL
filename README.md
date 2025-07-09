@@ -77,10 +77,10 @@ Resposta:
 }
 ```
 
----
-
 ## Documentação do BACKEND 
   - https://github.com/LmarDark/EncurtadorUrl-backend
+
+---
 
 ## 📄 Licença
 

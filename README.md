@@ -37,21 +37,14 @@ frontend/
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/EncurtadorUrl-frontend.git
-   cd EncurtadorUrl-frontend/frontend
+   git clone https://github.com/LmarDark/EncurtadorURL
+   cd EncurtadorURL/
    ```
 
-2. Abra o arquivo no navegador:
-   ```bash
-   xdg-open index.html  # Linux
-   start index.html     # Windows
-   open index.html      # macOS
-   ```
-
-3. Certifique-se de que a URL da API esteja configurada corretamente em `index.html`:
+2. Certifique-se de que a URL da API esteja configurada corretamente em `index.html`:
    ```js
    const api = axios.create({
-       baseURL: 'https://encurtadorurl-backend.onrender.com', // Substitua se necessário
+       baseURL: 'http://localhost:5500', // Substitua se necessário
        timeout: 5000,
        headers: {
            'Content-Type': 'application/json',

@@ -11,11 +11,6 @@
 
 ---
 
-### 📋 Descrição
-
-Este é o frontend do projeto **Encurtador de URL**, uma interface estática desenvolvida com **HTML**, **Tailwind CSS** e **JavaScript (Axios)**.  
-Ela se conecta à API do backend para gerar URLs curtas de forma rápida e intuitiva.
-
 ### 🚀 Funcionalidades
 
 - Inserir e enviar URLs longas para encurtamento.

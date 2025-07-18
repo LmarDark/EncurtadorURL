@@ -30,44 +30,62 @@
         }
       </style>
       <div class="flex flex-col items-center mb-6">
-        <button id="sidebar-toggle" 
-          class="fixed opacity-100 top-4 right-4 flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-12 rounded shadow-lg z-50 transition"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          Minhas URLs
-        </button>
-        <div id="sidebar"
-          class="fixed top-0 right-0 h-full w-3/2 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-40"
-        >
-          <div class="p-6 h-3/4">
-            <button id="sidebar-toggle-2" class="w-full mb-4 bg-blue-600 text-white font-semibold py-2 px-12 rounded shadow-lg">
-              Fechar
+        <div class="flex flex-col items-center mb-6">
+          <div class="fixed top-4 right-4 z-50 flex flex-col sm:flex-row items-end sm:items-center gap-2">
+            <a href="https://encurtadorurl-backend.onrender.com/swagger/" target="_blank" rel="noopener noreferrer"
+              class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow-lg transition w-full sm:w-auto justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              Documentação
+            </a>
+
+            <button id="sidebar-toggle"
+              class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow-lg transition w-full sm:w-auto justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              Minhas URLs
             </button>
-            <h2 class="text-center font-bold text-3xl">Minhas URLs</h2>
-            <div class="w-full max-w-xl h-full mx-auto">
-              <ul id="url-list" class="mt-4 overflow-y-auto h-full pr-2">
-                <li class="mb-2"><a href="" class="text-blue-600 hover:underline"></a></li>
-              </ul>
+          </div>
+
+          <div id="sidebar"
+            class="fixed top-0 right-0 h-full w-full sm:w-2/4 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+            <div class="p-6 h-full flex flex-col">
+              <button id="sidebar-toggle-2"
+                class="mb-4 bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow-lg">
+                Fechar
+              </button>
+              <h2 class="text-center font-bold text-2xl mb-4">Minhas URLs</h2>
+              <div class="flex-1 overflow-y-auto">
+                <ul id="url-list" class="space-y-2">
+                </ul>
+              </div>
             </div>
           </div>
+
+          <img src="https://cdn-icons-png.flaticon.com/512/892/892692.png" alt="Logo Encurtador"
+            class="w-16 h-16 mb-2 drop-shadow-md select-none">
+          <h1 class="text-3xl font-bold text-blue-700 text-center">Encurtador de URL</h1>
+          <p class="text-gray-500 text-center mt-2 text-base">Encurte links de forma rápida, fácil e gratuita.</p>
         </div>
-        <img src="https://cdn-icons-png.flaticon.com/512/892/892692.png" alt="Logo Encurtador" class="w-16 h-16 mb-2 drop-shadow-md select-none">
-        <h1 class="text-3xl font-bold text-blue-700 text-center">Encurtador de URL</h1>
-        <p class="text-gray-500 text-center mt-2 text-base">Encurte links de forma rápida, fácil e gratuita.</p>
-      </div>
-      <form id="shorten-form" class="space-y-4">
-        <input type="text" id="url-input" placeholder="Cole sua URL aqui" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-base sm:text-lg transition" />
-        <button type="submit" class="select-none w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-base sm:text-lg transition">Encurtar</button>
-      </form>
-      <div id="result" class="hidden mt-6">
-        <p class="text-gray-700 mb-2 text-center">URL encurtada:</p>
-        <a id="short-url" href="#" target="_blank" class="block bg-blue-50 border border-blue-200 rounded-lg px-4 py-2 text-blue-700 font-mono text-center break-all mb-3 hover:underline"></a>
-        <button id="copy-btn" class="w-full py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold rounded-lg transition">Copiar</button>
+        <form id="shorten-form" class="space-y-4">
+          <input type="text" id="url-input" placeholder="Cole sua URL aqui" required
+            class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-base sm:text-lg transition" />
+          <button type="submit"
+            class="select-none w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-base sm:text-lg transition">Encurtar</button>
+        </form>
+        <div id="result" class="hidden mt-6">
+          <p class="text-gray-700 mb-2 text-center">URL encurtada:</p>
+          <a id="short-url" href="#" target="_blank"
+            class="block bg-blue-50 border border-blue-200 rounded-lg px-4 py-2 text-blue-700 font-mono text-center break-all mb-3 hover:underline"></a>
+          <button id="copy-btn"
+            class="w-full py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold rounded-lg transition">Copiar</button>
+        </div>
       </div>
     </div>
-  </div>
   
   <footer class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 text-center py-3 text-sm text-gray-500 select-none z-50">
     © 2025 Meus Projetos. Desenvolvido por <a href="https://github.com/LmarDark" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">LmarDark</a>
@@ -184,61 +202,38 @@
         urlList.appendChild(li);
       });
     }
+    
+    document.getElementById('shorten-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const button = this.querySelector('button[type="submit"]');
+        button.disabled = true;
+        button.textContent = "Encurtando...";
 
-    document.getElementById('shorten-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const button = this.querySelector('button[type="submit"]');
-      button.disabled = true;
-      button.textContent = "Encurtando...";
+        const url = document.getElementById('url-input').value;
+        await createShorterUrl({ originalUrl: url });
 
-      const url = document.getElementById('url-input').value;
-      await createShorterUrl({ originalUrl: url });
+        button.disabled = false;
+        button.textContent = "Encurtar";
+      });
 
-      button.disabled = false;
-      button.textContent = "Encurtar";
-    });
+      document.getElementById('copy-btn').addEventListener('click', function () {
+        const shortUrl = document.getElementById('short-url').textContent;
+        navigator.clipboard.writeText(shortUrl);
+      });
 
-    document.getElementById('copy-btn').addEventListener('click', function() {
-      const shortUrl = document.getElementById('short-url').textContent;
-      navigator.clipboard.writeText(shortUrl);
-    });
+      const toggleBtn = document.getElementById('sidebar-toggle');
+      const toggleBtn2 = document.getElementById('sidebar-toggle-2');
+      const sidebar = document.getElementById('sidebar');
 
-    const toggleBtn = document.getElementById('sidebar-toggle');
-    const toggleBtn2 = document.getElementById('sidebar-toggle-2');
-    const sidebar = document.getElementById('sidebar');
-
-
-    toggleBtn.addEventListener('click', () => {
-      if (toggleBtn.classList.contains('opacity-100')) {
-        toggleBtn.classList.remove('opacity-100', 'pointer-events-none');
-        toggleBtn.classList.add('opacity-0');
-        toggleBtn.classList.add('hidden');
+      toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('translate-x-full');
         renderUrlsFromLocalStorage();
+      });
 
-      } else  {
-        toggleBtn.classList.remove('hidden');
-        toggleBtn.classList.remove('opacity-0', 'pointer-events-none');
-        toggleBtn.classList.add('opacity-100');
-      }
-
-      sidebar.classList.toggle('translate-x-full');
-    });
-
-    toggleBtn2.addEventListener('click', () => {
-      if (toggleBtn.classList.contains('opacity-100')) {
-        toggleBtn.classList.remove('opacity-100', 'pointer-events-none');
-        toggleBtn.classList.add('opacity-0');
-        toggleBtn.classList.add('hidden');
-        
-      } else  {
-        toggleBtn.classList.remove('hidden');
-        toggleBtn.classList.remove('opacity-0', 'pointer-events-none');
-        toggleBtn.classList.add('opacity-100');
-      }
-
-      sidebar.classList.toggle('translate-x-full');
-    });
-  </script>
+      toggleBtn2.addEventListener('click', () => {
+        sidebar.classList.add('translate-x-full');
+      });
+    </script>
   </div>
 </body>
 </html>

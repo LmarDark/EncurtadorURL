@@ -68,7 +68,7 @@
 
 Você pode testar a aplicação em produção acessando:
 
-**🔗 https://lmardark.github.io/EncurtadorURL/**
+**🔗 https://lmardark.github.io/EncurtadorURL-frontend/**
 
 ---
 

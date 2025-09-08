@@ -10,9 +10,6 @@
 
 ---
 
-<p>
-  📖 [Documentação do Front-End](https://github.com/LmarDark/EncurtadorURL/blob/main/frontend/README.md)
-</p>
-<p>
-  📖 [Documentação do Back-End](https://github.com/LmarDark/EncurtadorURL/blob/main/backend/README.md)
-</p>
+ - 📖 [Documentação do Front-End](https://github.com/LmarDark/EncurtadorURL/blob/main/frontend/README.md)
+
+ - 📖 [Documentação do Back-End](https://github.com/LmarDark/EncurtadorURL/blob/main/backend/README.md)

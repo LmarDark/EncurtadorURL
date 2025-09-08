@@ -3,7 +3,7 @@
   <img src="https://cdn-icons-png.flaticon.com/512/892/892692.png" alt="Logo Encurtador" width="100" />
 </p>
 
-<h1 align="center">Encurtador de URL - Frontend</h1>
+<h1 align="center">Documentação do Front-End</h1>
 
 <p align="center">
   Interface simples, leve e responsiva para criação e compartilhamento de URLs curtas, com backend em Laravel para gerenciamento das URLs.

@@ -1,0 +1,112 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "URL Shortener API",
+    "version": "1.0.0",
+    "description": "API para encurtar URLs e endpoints auxiliares"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Verifica status da API",
+        "responses": {
+          "200": {
+            "description": "API está funcionando",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/create": {
+      "post": {
+        "summary": "Cria uma URL encurtada",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "originalUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "example": "https://example.com"
+                  }
+                },
+                "required": ["originalUrl"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "URL encurtada criada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "short_url": {
+                      "type": "string",
+                      "example": "https://short.ly/abc123"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição inválida"
+          }
+        }
+      }
+    },
+    "/{short_code}": {
+      "get": {
+        "summary": "Redireciona para URL original pelo código curto",
+		"parameters": [
+          {
+            "name": "short_code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Código curto da URL"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirecionamento para URL original",
+            "headers": {
+              "Location": {
+                "description": "URL de destino",
+                "schema": {
+                  "type": "string",
+                  "format": "uri",
+                  "example": "https://example.com"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Código curto não encontrado"
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -79,6 +79,14 @@ Resposta:
 
 ---
 
+## 🌐 Ambiente de Produção
+
+Você pode testar a aplicação em produção acessando:
+
+**🔗 https://lmardark.github.io/EncurtadorURL-frontend/**
+
+---
+
 ## 📄 Documentação do Backend
 ### - ▶ [Repositório Backend no GitHub](https://github.com/LmarDark/EncurtadorUrl-backend) ◀
 

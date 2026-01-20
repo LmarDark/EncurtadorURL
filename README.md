@@ -16,6 +16,14 @@
 
 ---
 
+## 🌐 Ambiente de Produção
+
+Você pode testar a aplicação em produção acessando:
+
+**🔗 https://lmardark.github.io/EncurtadorURL-frontend/**
+
+---
+
 ## 📄 Licença
 
 Este projeto está licenciado sob a [MIT License](https://opensource.org/licenses/MIT).

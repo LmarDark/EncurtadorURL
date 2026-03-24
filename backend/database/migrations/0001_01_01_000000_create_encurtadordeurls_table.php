@@ -6,23 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('encurtadordeurls', function (Blueprint $table) {
             $table->id();
             $table->string('original_url');
-            $table->string('code')->unique();
+            $table->string('code', 30)->unique();
+            $table->unsignedBigInteger('clicks')->default(0);
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('encurtadordeurls');

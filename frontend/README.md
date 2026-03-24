@@ -1,100 +1,62 @@
-
 <p align="center">
   <img src="https://cdn-icons-png.flaticon.com/512/892/892692.png" alt="Logo Encurtador" width="100" />
 </p>
 
-<h1 align="center">Documentação do Front-End</h1>
+<h1 align="center">Frontend — Encurtador de URL</h1>
 
 <p align="center">
-  Interface simples, leve e responsiva para criação e compartilhamento de URLs curtas, com backend em Laravel para gerenciamento das URLs.
+  Interface original do frontend. Em produção, o arquivo <code>index.html</code> é servido diretamente pelo Laravel em <code>backend/public/index.html</code>.
 </p>
 
 ---
 
-### 🚀 Funcionalidades
+## Tecnologias
 
-- Inserir e enviar URLs longas para encurtamento.
-- Exibir a URL curta gerada.
-- Botão de copiar para a área de transferência.
-- Layout responsivo e moderno com animações visuais.
-- Integração com o backend via API RESTful.
-
-### 🧰 Tecnologias utilizadas
-
-- Tailwind CSS  
-- Axios  
-- HTML5  
+- HTML5
+- Tailwind CSS (via CDN)
+- Axios (via CDN)
 - JavaScript ES6+
 
-### 📂 Estrutura
+## Funcionalidades
 
-```
-frontend/
-├── index.html       # Página principal do frontend
-```
+- Encurtar URLs com código aleatório ou **código personalizado**
+- Exibir a URL curta gerada com botão de copiar
+- Sidebar "Minhas URLs" com histórico local (localStorage, 7 dias) e contagem de cliques
+- Mensagens de erro detalhadas por campo (ex: código já em uso)
 
-### 🛠️ Como rodar localmente
+## Fluxo
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/LmarDark/EncurtadorURL
-   cd EncurtadorURL/
-   ```
+1. Usuário cola a URL e (opcionalmente) define um código personalizado
+2. Frontend envia `POST /api/create`
+3. Backend retorna a URL curta com metadados
+4. Interface exibe o link e salva no histórico local
 
-2. Certifique-se de que a URL da API esteja configurada corretamente em `index.html`:
-   ```js
-   const api = axios.create({
-       baseURL: 'http://localhost:5500', // Substitua se necessário
-       timeout: 5000,
-       headers: {
-           'Content-Type': 'application/json',
-       },
-   });
-   ```
-
-### 📡 Fluxo resumido
-
-1. Usuário insere a URL original  
-2. O frontend envia via `POST /api/create`  
-3. Backend retorna a URL curta  
-4. Interface exibe e permite copiar o link  
-
-### 🧪 Exemplo de requisição
+## Exemplo de requisição
 
 ```http
 POST /api/create
 Content-Type: application/json
 
 {
-  "originalUrl": "https://exemplo.com/artigo"
+  "originalUrl": "https://exemplo.com/artigo",
+  "customCode": "meulink"
 }
 ```
 
-Resposta:
+**Resposta:**
 ```json
 {
-  "shortUrl": "https://encurtadorurl-backend.onrender.com/AbC123"
+  "original_url": "https://exemplo.com/artigo",
+  "short_url": "https://encurtador.rondodev.com.br/meulink",
+  "clicks": 0,
+  "expires_at": "2026-03-31 17:00:00"
 }
 ```
 
----
+## Nota
 
-## 🌐 Ambiente de Produção
+Este diretório existe como referência do source original. Em produção, o `index.html` compilado com `baseURL: ''` fica em `backend/public/index.html` e é servido pelo próprio Laravel.
 
-Você pode testar a aplicação em produção acessando:
+## Licença
 
-**🔗 https://lmardark.github.io/EncurtadorURL-frontend/**
-
----
-
-## 📄 Documentação do Backend
-### - ▶ [Repositório Backend no GitHub](https://github.com/LmarDark/EncurtadorUrl-backend) ◀
-
-
----
-
-## 📄 Licença
-
-Este projeto está licenciado sob a [MIT License](https://opensource.org/licenses/MIT).
-
----
+MIT

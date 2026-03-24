@@ -21,7 +21,8 @@ return [
 
     'allowed_origins' => [
         'https://lmardark.github.io',
-        'https://lmardark.github.io/EncurtadorUrl-frontend/'
+        'https://lmardark.github.io/EncurtadorUrl-frontend/',
+        'https://encurtador.rondodev.com.br',
     ],
 
     'allowed_origins_patterns' => [],

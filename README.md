@@ -5,27 +5,40 @@
 <h1 align="center">Encurtador de URL</h1>
 
 <p align="center">
-  Interface simples, leve e responsiva para criação e compartilhamento de URLs curtas, com backend em Laravel para gerenciamento das URLs.
+  Encurtador de links rápido, leve e auto-hospedado. Backend em Laravel, frontend servido pelo próprio Laravel — tudo em um único container Docker.
 </p>
 
 ---
 
- - 📖 [Documentação do Front-End](https://github.com/LmarDark/EncurtadorURL/blob/main/frontend/README.md)
-
- - 📖 [Documentação do Back-End](https://github.com/LmarDark/EncurtadorURL/blob/main/backend/README.md)
+**🔗 https://encurtador.rondodev.com.br**
 
 ---
 
-## 🌐 Ambiente de Produção
+## Funcionalidades
 
-Você pode testar a aplicação em produção acessando:
+- Encurtar qualquer URL com código aleatório ou **código personalizado**
+- Redirecionamento automático com contagem de cliques
+- Expiração automática em 7 dias com limpeza diária agendada
+- Histórico de links criados salvo localmente no navegador
+- API RESTful pronta para integração
 
-**🔗 https://lmardark.github.io/EncurtadorURL-frontend/**
+## Stack
 
----
+- **Backend:** Laravel 11, PHP 8.3, SQLite
+- **Frontend:** HTML5, Tailwind CSS, Axios
+- **Infra:** Docker, Nginx (proxy reverso), Let's Encrypt
 
-## 📄 Licença
+## Estrutura
 
-Este projeto está licenciado sob a [MIT License](https://opensource.org/licenses/MIT).
+```
+EncurtadorURL/
+├── backend/     # Laravel API + frontend embutido em public/
+└── frontend/    # Fonte original do frontend (referência)
+```
 
----
+- 📖 [Documentação do Backend](./backend/README.md)
+- 📖 [Documentação do Frontend](./frontend/README.md)
+
+## Licença
+
+MIT

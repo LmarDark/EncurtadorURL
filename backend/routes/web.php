@@ -10,4 +10,8 @@ Route::middleware('throttle:1,4')->group(function () {
     });
 });
 
+Route::get('/', function () {
+    return response()->file(public_path('index.html'));
+});
+
 Route::get('/{code}', [UrlController::class, 'redirect'])->middleware(BlockSwaggerRequests::class);

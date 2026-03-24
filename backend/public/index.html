@@ -27,10 +27,8 @@
   <meta name="twitter:description" content="Encurtador de URL gratuito. Gere links curtos com código personalizado e acompanhe cliques.">
   <meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/892/892692.png">
 
-  <!-- Favicon -->
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/892/892692.png" type="image/png">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -40,170 +38,295 @@
     "description": "Encurtador de URL gratuito. Gere links curtos com código personalizado e acompanhe os cliques.",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "All",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "BRL"
-    },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
     "inLanguage": "pt-BR"
   }
   </script>
 
-  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9536858565790302" crossorigin="anonymous"></script>
-
-  <!-- Dependências -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    @keyframes pulse-slow {
-      0%, 100% { opacity: 0.4; transform: scale(1); }
-      50% { opacity: 0.7; transform: scale(1.08); }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    * { font-family: 'Inter', system-ui, sans-serif; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
     }
-    .animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
-    .blur-3xl { filter: blur(64px); }
-    .ad-unit { min-height: 90px; background: transparent; }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.55; transform: scale(1.06); }
+    }
+    .animate-float { animation: float 4s ease-in-out infinite; }
+    .animate-pulse-slow { animation: pulse-slow 7s ease-in-out infinite; }
+    .blur-orb { filter: blur(72px); }
+
+    .glass {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+
+    .input-field {
+      display: block;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 0.625rem;
+      font-size: 0.9375rem;
+      color: #111827;
+      background: #f9fafb;
+      transition: border-color .15s, box-shadow .15s, background .15s;
+      outline: none;
+    }
+    .input-field:focus {
+      border-color: #3b82f6;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+    }
+    .input-field::placeholder { color: #9ca3af; }
+
+    .btn-primary {
+      width: 100%;
+      padding: 0.8125rem 1rem;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 0.625rem;
+      border: none;
+      cursor: pointer;
+      transition: background .15s, transform .1s, box-shadow .15s;
+      box-shadow: 0 4px 14px rgba(37,99,235,0.3);
+    }
+    .btn-primary:hover { background: #1d4ed8; box-shadow: 0 6px 20px rgba(37,99,235,0.38); }
+    .btn-primary:active { transform: scale(0.985); }
+    .btn-primary:disabled { background: #93c5fd; box-shadow: none; cursor: not-allowed; }
+
+    .result-link {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: #eff6ff;
+      border: 1.5px solid #bfdbfe;
+      border-radius: 0.625rem;
+      color: #1d4ed8;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      text-align: center;
+      word-break: break-all;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .result-link:hover { background: #dbeafe; }
+
+    .btn-copy {
+      width: 100%;
+      padding: 0.625rem 1rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 0.625rem;
+      border: 1.5px solid #bfdbfe;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-copy:hover { background: #dbeafe; }
+
+    .feature-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.75rem;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      color: #374151;
+      backdrop-filter: blur(8px);
+    }
+    .feature-chip svg { color: #3b82f6; }
+
+    /* Sidebar */
+    #sidebar {
+      box-shadow: -8px 0 32px rgba(0,0,0,0.12);
+    }
+
+    /* Ad placeholder styling */
+    .ad-wrap {
+      width: 100%;
+      min-height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   </style>
 </head>
-<body>
-  <!-- Anúncio topo (leaderboard 728x90 / responsivo) -->
-  <div class="w-full flex justify-center py-2 bg-white border-b border-gray-100">
-    <ins class="adsbygoogle ad-unit"
-         style="display:block;width:100%;max-width:728px;"
-         data-ad-client="ca-pub-9536858565790302"
-         data-ad-slot="SLOT_TOPO"
-         data-ad-format="horizontal"
-         data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<body class="bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 min-h-screen">
+
+  <!-- Sidebar -->
+  <div id="sidebar" role="dialog" aria-label="Histórico de URLs"
+    class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+    <div class="flex items-center justify-between p-5 border-b border-gray-100">
+      <h2 class="font-bold text-xl text-gray-800">Minhas URLs</h2>
+      <button id="sidebar-toggle-2" aria-label="Fechar histórico"
+        class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-4">
+      <ul id="url-list" class="space-y-3"></ul>
+    </div>
   </div>
 
-  <div class="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-100 px-4 sm:px-0 pb-16">
-    <div aria-hidden="true" class="absolute inset-0 w-full h-full z-0">
-      <div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-gradient-to-tr from-blue-400 via-blue-200 to-purple-300 opacity-40 rounded-full animate-pulse-slow blur-3xl"></div>
-      <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-gradient-to-br from-purple-400 via-pink-200 to-blue-200 opacity-30 rounded-full animate-pulse-slow blur-3xl"></div>
+  <!-- Botão Minhas URLs -->
+  <div class="fixed top-4 right-4 z-40">
+    <button id="sidebar-toggle" aria-label="Abrir histórico de URLs"
+      class="flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-medium text-sm py-2 px-4 rounded-full shadow-lg border border-gray-200 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+      </svg>
+      Minhas URLs
+    </button>
+  </div>
+
+  <!-- Anúncio topo -->
+  <div class="w-full bg-white border-b border-gray-100 py-2 px-4">
+    <div class="ad-wrap max-w-3xl mx-auto">
+      <ins class="adsbygoogle"
+           style="display:block;width:100%;"
+           data-ad-client="ca-pub-9536858565790302"
+           data-ad-slot="SLOT_TOPO"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+
+  <div class="min-h-screen flex flex-col items-center justify-center px-4 py-12 relative">
+
+    <!-- Orbs decorativos -->
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden">
+      <div class="absolute -top-40 -left-40 w-96 h-96 bg-blue-300 rounded-full animate-pulse-slow blur-orb opacity-40"></div>
+      <div class="absolute top-1/2 -right-32 w-80 h-80 bg-indigo-300 rounded-full animate-pulse-slow blur-orb opacity-30" style="animation-delay:2s"></div>
+      <div class="absolute -bottom-20 left-1/3 w-72 h-72 bg-purple-200 rounded-full animate-pulse-slow blur-orb opacity-30" style="animation-delay:4s"></div>
     </div>
 
-    <div class="w-full max-w-md mx-auto relative z-10 flex flex-col gap-4">
+    <div class="w-full max-w-lg mx-auto relative z-10 flex flex-col gap-5">
+
+      <!-- Header -->
+      <div class="text-center mb-2">
+        <img src="https://cdn-icons-png.flaticon.com/512/892/892692.png" alt="Ícone de link encurtado"
+          class="w-14 h-14 mx-auto mb-4 animate-float drop-shadow-md" width="56" height="56">
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">Encurtador de URL</h1>
+        <p class="text-gray-500 mt-2 text-base">Links curtos, rápidos e gratuitos.</p>
+
+        <!-- Feature chips -->
+        <div class="flex flex-wrap justify-center gap-2 mt-4">
+          <span class="feature-chip">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Sem cadastro
+          </span>
+          <span class="feature-chip">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+            Código personalizado
+          </span>
+          <span class="feature-chip">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            Contagem de cliques
+          </span>
+        </div>
+      </div>
 
       <!-- Card principal -->
-      <main class="shadow-lg bg-white rounded-xl p-6 sm:p-8">
-        <div class="flex flex-col items-center mb-6">
-          <!-- Sidebar toggle -->
-          <div class="fixed top-4 right-4 z-50">
-            <button id="sidebar-toggle" aria-label="Abrir histórico de URLs"
-              class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow-lg transition">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-              Minhas URLs
-            </button>
-          </div>
-
-          <!-- Sidebar -->
-          <div id="sidebar" role="dialog" aria-label="Histórico de URLs"
-            class="fixed top-0 right-0 h-full w-full sm:w-2/4 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50">
-            <div class="p-6 h-full flex flex-col">
-              <button id="sidebar-toggle-2" aria-label="Fechar histórico"
-                class="mb-4 bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow-lg">
-                Fechar
-              </button>
-              <h2 class="text-center font-bold text-2xl mb-4">Minhas URLs</h2>
-              <div class="flex-1 overflow-y-auto">
-                <ul id="url-list" class="space-y-2"></ul>
-              </div>
-            </div>
-          </div>
-
-          <img src="https://cdn-icons-png.flaticon.com/512/892/892692.png" alt="Ícone de link encurtado"
-            class="w-16 h-16 mb-2 drop-shadow-md select-none" width="64" height="64">
-          <h1 class="text-3xl font-bold text-blue-700 text-center">Encurtador de URL</h1>
-          <p class="text-gray-500 text-center mt-2 text-base">Encurte links de forma rápida, fácil e gratuita.</p>
-        </div>
-
+      <main class="glass rounded-2xl p-6 sm:p-8 shadow-xl">
         <form id="shorten-form" class="space-y-4" aria-label="Formulário de encurtamento de URL">
-          <label for="url-input" class="sr-only">URL a encurtar</label>
-          <input type="url" id="url-input" name="url" placeholder="Cole sua URL aqui" required
-            autocomplete="url"
-            class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-base sm:text-lg transition" />
-          <div class="flex items-center gap-2">
-            <span class="text-gray-400 text-sm font-mono whitespace-nowrap select-none">/ (opcional)</span>
-            <label for="custom-code-input" class="sr-only">Código personalizado</label>
-            <input type="text" id="custom-code-input" name="customCode" placeholder="código-personalizado"
-              class="block w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm transition font-mono" />
+          <div>
+            <label for="url-input" class="block text-sm font-medium text-gray-700 mb-1.5">URL original</label>
+            <input type="url" id="url-input" name="url" placeholder="https://exemplo.com/link-muito-longo" required
+              autocomplete="url" class="input-field" />
           </div>
-          <button type="submit"
-            class="select-none w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-base sm:text-lg transition">
-            Encurtar
-          </button>
+
+          <div>
+            <label for="custom-code-input" class="block text-sm font-medium text-gray-700 mb-1.5">
+              Código personalizado <span class="text-gray-400 font-normal">(opcional)</span>
+            </label>
+            <div class="flex items-center input-field gap-0 p-0 overflow-hidden">
+              <span class="px-3 py-3 text-gray-400 text-sm font-mono bg-gray-50 border-r border-gray-200 select-none whitespace-nowrap shrink-0">encurtador.rondodev.com.br/</span>
+              <input type="text" id="custom-code-input" name="customCode" placeholder="meu-link"
+                class="flex-1 px-3 py-3 text-sm font-mono outline-none bg-transparent min-w-0" />
+            </div>
+            <p class="text-xs text-gray-400 mt-1">Letras e números, 3–30 caracteres.</p>
+          </div>
+
+          <button type="submit" class="btn-primary">Encurtar link</button>
         </form>
 
-        <div id="result" class="hidden mt-6" aria-live="polite">
-          <p class="text-gray-700 mb-2 text-center">URL encurtada:</p>
-          <a id="short-url" href="#" target="_blank" rel="noopener noreferrer"
-            class="block bg-blue-50 border border-blue-200 rounded-lg px-4 py-2 text-blue-700 font-mono text-center break-all mb-3 hover:underline"></a>
-          <button id="copy-btn"
-            class="w-full py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold rounded-lg transition">
-            Copiar
-          </button>
+        <div id="result" class="hidden mt-5 space-y-3" aria-live="polite">
+          <div class="flex items-center gap-2 text-green-600 text-sm font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Link encurtado com sucesso!
+          </div>
+          <a id="short-url" href="#" target="_blank" rel="noopener noreferrer" class="result-link"></a>
+          <button id="copy-btn" class="btn-copy">Copiar link</button>
         </div>
       </main>
 
-      <!-- Anúncio meio (retângulo responsivo, aparece após interação) -->
-      <div class="bg-white rounded-xl shadow p-2 flex justify-center">
-        <ins class="adsbygoogle ad-unit"
-             style="display:block;width:100%;"
-             data-ad-client="ca-pub-9536858565790302"
-             data-ad-slot="SLOT_MEIO"
-             data-ad-format="rectangle"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <!-- Anúncio meio -->
+      <div class="glass rounded-2xl shadow overflow-hidden">
+        <div class="ad-wrap px-4 py-3">
+          <ins class="adsbygoogle"
+               style="display:block;width:100%;"
+               data-ad-client="ca-pub-9536858565790302"
+               data-ad-slot="SLOT_MEIO"
+               data-ad-format="rectangle"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
       </div>
 
-      <!-- Bloco de contexto para SEO / Conteúdo indexável -->
-      <section class="bg-white rounded-xl shadow p-6 text-sm text-gray-600 space-y-3">
+      <!-- Bloco de conteúdo indexável -->
+      <section class="glass rounded-2xl p-6 shadow text-sm text-gray-600 space-y-3">
         <h2 class="font-semibold text-gray-800 text-base">Como funciona?</h2>
-        <p>Cole qualquer URL longa no campo acima, opcionalmente defina um código personalizado (ex: <code class="bg-gray-100 px-1 rounded font-mono">meu-link</code>) e clique em <strong>Encurtar</strong>. Seu link ficará disponível por 7 dias e você poderá acompanhar quantas vezes foi acessado.</p>
-        <ul class="list-disc list-inside space-y-1 text-gray-500">
-          <li>Sem cadastro necessário</li>
-          <li>Código personalizado disponível</li>
-          <li>Contagem de cliques em tempo real</li>
-          <li>Links expiram automaticamente em 7 dias</li>
+        <p>Cole qualquer URL longa, opcionalmente defina um código personalizado e clique em <strong>Encurtar link</strong>. Seu link fica disponível por 7 dias e você acompanha quantos acessos recebeu.</p>
+        <ul class="space-y-1.5 text-gray-500">
+          <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-blue-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Sem cadastro necessário</li>
+          <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-blue-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Código personalizado disponível</li>
+          <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-blue-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Contagem de cliques em tempo real</li>
+          <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-blue-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Links expiram automaticamente em 7 dias</li>
         </ul>
       </section>
 
     </div>
   </div>
 
-  <footer class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 text-center py-3 text-sm text-gray-500 select-none z-40">
+  <footer class="text-center py-4 text-xs text-gray-400 pb-6">
     © 2025 Encurtador de URL — Desenvolvido por
-    <a href="https://github.com/LmarDark" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">LmarDark</a>
-    · <a href="https://lmardark.rondodev.com.br" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Portfolio</a>
+    <a href="https://github.com/LmarDark" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">LmarDark</a>
+    ·
+    <a href="https://lmardark.rondodev.com.br" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">Portfolio</a>
   </footer>
 
   <script>
-    const api = axios.create({
-      baseURL: '',
-      timeout: 5000,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    const api = axios.create({ baseURL: '', timeout: 5000, headers: { 'Content-Type': 'application/json' } });
 
     async function createShorterUrl(data) {
       try {
         const response = await api.post('/api/create', data);
-        document.getElementById('result').classList.remove('hidden');
+        const { short_url, original_url } = response.data;
 
-        const shortUrl = response.data.short_url;
-        const originalUrl = response.data.original_url;
+        document.getElementById('result').classList.remove('hidden');
         const shortUrlElem = document.getElementById('short-url');
-        shortUrlElem.href = shortUrl;
-        shortUrlElem.textContent = shortUrl;
+        shortUrlElem.href = short_url;
+        shortUrlElem.textContent = short_url;
 
         const stored = getFromLocalStorageWithExpiry('shortenedUrls') || [];
-        saveToLocalStorageWithExpiry('shortenedUrls', [
-          { original_url: originalUrl, short_url: shortUrl, clicks: 0 },
-          ...stored
-        ], 7);
+        saveToLocalStorageWithExpiry('shortenedUrls', [{ original_url, short_url, clicks: 0 }, ...stored], 7);
       } catch (error) {
         const msg = error.response?.data?.errors?.customCode?.[0]
           || error.response?.data?.message
@@ -213,10 +336,7 @@
     }
 
     function saveToLocalStorageWithExpiry(key, value, days = 7) {
-      localStorage.setItem(key, JSON.stringify({
-        value,
-        expiry: Date.now() + days * 864e5
-      }));
+      localStorage.setItem(key, JSON.stringify({ value, expiry: Date.now() + days * 864e5 }));
     }
 
     function getFromLocalStorageWithExpiry(key) {
@@ -235,52 +355,46 @@
       urlList.innerHTML = '';
 
       if (!urls.length) {
-        urlList.innerHTML = '<li class="text-gray-500 text-sm">Nenhum link encurtado ainda.</li>';
+        urlList.innerHTML = '<li class="text-gray-400 text-sm text-center py-8">Nenhum link encurtado ainda.</li>';
         return;
       }
 
       urls.forEach(({ original_url, short_url, clicks }) => {
         const li = document.createElement('li');
-        li.className = 'flex items-center justify-between bg-white shadow rounded p-3 mb-3 border';
+        li.className = 'bg-gray-50 border border-gray-100 rounded-xl p-3 flex items-start gap-3';
 
         const domain = new URL(original_url).hostname;
         const img = document.createElement('img');
         img.src = `https://icons.duckduckgo.com/ip3/${domain}.ico`;
         img.alt = domain;
-        img.className = 'w-8 h-8 mr-3 shrink-0';
-        img.width = 32; img.height = 32;
+        img.className = 'w-7 h-7 mt-0.5 rounded shrink-0';
+        img.width = 28; img.height = 28;
         li.appendChild(img);
 
         const linkBlock = document.createElement('div');
-        linkBlock.className = 'flex-grow overflow-hidden';
+        linkBlock.className = 'flex-grow overflow-hidden min-w-0';
 
-        const short = document.createElement('p');
+        const short = document.createElement('a');
+        short.href = short_url;
+        short.target = '_blank';
+        short.rel = 'noopener noreferrer';
         short.textContent = short_url;
-        short.className = 'text-blue-700 font-semibold break-all text-sm';
+        short.className = 'text-blue-600 font-medium text-sm break-all hover:underline block';
         linkBlock.appendChild(short);
 
         const original = document.createElement('p');
         original.textContent = original_url;
-        original.className = 'text-gray-500 text-xs break-all';
+        original.className = 'text-gray-400 text-xs break-all mt-0.5';
         linkBlock.appendChild(original);
 
         if (clicks !== undefined) {
           const clicksBadge = document.createElement('span');
-          clicksBadge.textContent = clicks + ' cliques';
-          clicksBadge.className = 'text-xs text-gray-400 mt-0.5 block';
+          clicksBadge.textContent = `${clicks} clique${clicks !== 1 ? 's' : ''}`;
+          clicksBadge.className = 'inline-flex items-center text-xs text-gray-400 mt-1 bg-gray-100 px-2 py-0.5 rounded-full';
           linkBlock.appendChild(clicksBadge);
         }
 
         li.appendChild(linkBlock);
-
-        const visitBtn = document.createElement('a');
-        visitBtn.href = short_url;
-        visitBtn.target = '_blank';
-        visitBtn.rel = 'noopener noreferrer';
-        visitBtn.textContent = 'Visitar';
-        visitBtn.className = 'ml-3 shrink-0 text-sm text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded';
-        li.appendChild(visitBtn);
-
         urlList.appendChild(li);
       });
     }
@@ -296,13 +410,13 @@
       await createShorterUrl({ originalUrl: url, ...(customCode && { customCode }) });
 
       button.disabled = false;
-      button.textContent = 'Encurtar';
+      button.textContent = 'Encurtar link';
     });
 
     document.getElementById('copy-btn').addEventListener('click', function () {
       navigator.clipboard.writeText(document.getElementById('short-url').textContent);
-      this.textContent = 'Copiado!';
-      setTimeout(() => { this.textContent = 'Copiar'; }, 2000);
+      this.textContent = '✓ Copiado!';
+      setTimeout(() => { this.textContent = 'Copiar link'; }, 2000);
     });
 
     const sidebar = document.getElementById('sidebar');
